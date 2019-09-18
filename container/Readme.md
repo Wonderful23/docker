@@ -1,0 +1,11 @@
+## docker 常见命令
+- docker run hello-world 运行image
+- docker build -t = imagName .  将其打包成镜像
+- docker image ls 显示有的镜像
+- docker run -p 4000:80 imageName 运行镜像将docker端口80映射到4000
+- docker run -d -p 4000:80 imageName 后台运行
+- docker container ls 显示运行的容器
+- docker container stop ID 终止某个容器
+- docker login 登录docker账号
+- docker tag image username/repo:tag 重命名
+- docker push username/repo:tag 将镜像push到remote
