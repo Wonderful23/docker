@@ -1,0 +1,21 @@
+## docker swarm 常见命令
+- docker-machine create -d hyperv --hyperv-virtual-switch "myswitch" myvm1 # Win10
+- docker-machine env myvm1                # View basic information about your node
+- docker-machine ssh myvm1 "docker node ls"         # List the nodes in your swarm
+- docker-machine ssh myvm1 "docker node inspect <node ID>"        # Inspect a node
+- docker-machine ssh myvm1 "docker swarm join-token -q worker"   # View join token
+- docker-machine ssh myvm1   # Open an SSH session with the VM; type "exit" to end
+- docker node ls                # View nodes in swarm (while logged on to manager)
+- docker-machine ssh myvm2 "docker swarm leave"  # Make the worker leave the swarm
+- docker-machine ssh myvm1 "docker swarm leave -f" # Make master leave, kill swarm
+- docker-machine ls # list VMs, asterisk shows which VM this shell is talking to
+- docker-machine start myvm1            # Start a VM that is currently not running
+- docker-machine env myvm1      # show environment variables and command for myvm1
+- @FOR /f "tokens=*" %i IN ('docker-machine env myvm2') DO @%i        # Linux command to connect shell to myvm1
+- docker stack deploy -c <file> <app>  # Deploy an app; command shell must be set to talk to manager (myvm1), uses local Compose file
+- docker-machine ssh myvm1 "docker stack deploy -c <file> <app>"   # Deploy an app using ssh (you must have first copied the Compose file to myvm1)
+- docker-machine stop $(docker-machine ls -q)               # Stop all running VMs
+- docker-machine rm $(docker-machine ls -q) # Delete all VMs and their disk images
+## 遇坑处理
+- Hyper-V 虚拟机开启从windows任务管理器，同时从Windows管理中打开Hyper-V 的管理页面
+- 无法使用 VM WorkStations
